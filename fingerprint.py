@@ -3,6 +3,7 @@
 import time
 from pyfingerprint.pyfingerprint import PyFingerprint
 from db import enregistrer_empreinte, comparer_empreinte
+tentative = 0
 
 def init_sensor():
     try:
@@ -48,9 +49,17 @@ def verify_fingerprint(f):
 
     if match:
         print(f"✅✅ MATCH ! L'empreinte correspond à l'ID {user_id} nommer {nom} {prenom} qui a le grade {grade} (Score : {score})")
+        tentative=0       
         return match, score, user_id, grade, nom, prenom
     else:
         print(f"❌ PAS DE MATCH ! (Score : {score})")
+        tentative+=1
+        if tentative >= 10 :
+            with smtplib.SMTP(smtp_server, port) as server:
+                server.starttls()  # Sécuriser la connexion
+                server.login(login, password)
+                server.sendmail(sender_email, receiver_email, message.as_string())
+            print('Envoyé')
         return None,None,None,None,None,None
 
 
