@@ -3,6 +3,7 @@
 import time
 from pyfingerprint.pyfingerprint import PyFingerprint
 from db import enregistrer_empreinte, comparer_empreinte
+from mail import port,smtp_server,login,password,sender_email,receiver_email,message,smtplib
 tentative = 0
 
 def init_sensor():
