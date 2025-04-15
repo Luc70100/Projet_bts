@@ -4,6 +4,7 @@ import time
 from pyfingerprint.pyfingerprint import PyFingerprint
 from db import enregistrer_empreinte, comparer_empreinte
 from mail import port,smtp_server,login,password,sender_email,receiver_email,message,smtplib
+from lcd_display import scroll_text
 tentative = 0
 
 def init_sensor():
@@ -34,14 +35,13 @@ def enroll_fingerprint(f):
     print("✅ Empreinte enregistrée.")
 
 def verify_fingerprint(f):
-    print("\n🔄 Retire ton doigt puis repose-le pour la vérification...")
     time.sleep(2)
 
-    print("\n👉 Place ton doigt pour vérification...")
+    scroll_text("\n👉 Place ton doigt pour vérification...")
+    
     while not f.readImage():
         pass
-
-    print("✅ Nouvelle empreinte capturée !")
+    scroll_text("✅ Nouvelle empreinte capturée !")
     f.convertImage(0x01)
     new_characteristics = f.downloadCharacteristics(0x01)
 

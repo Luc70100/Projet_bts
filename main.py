@@ -25,14 +25,18 @@ menu = 0
 def menu_actions(menu):
     clear()
     if menu == 1:
+        clear()
         scroll_text("Menu: Ajouter doigt", line=1)
         display_message("Appuyez sur B", line=2)
     elif menu == 2:
+        clear()
         scroll_text("Menu: Ouverture", line=1)
         display_message("Appuyez sur B", line=2)
     elif menu == 3:
+        clear()
         scroll_text("Menu: Supprimer", line=1)
         display_message("Appuyez sur B", line=2)
+
 
 def handle_function(menu, sensor):
     if menu == 1:
@@ -46,25 +50,27 @@ def handle_function(menu, sensor):
             match = result[0]
         if match == True:   
             open_door()
-            check_door_status(speaker)  # Vérifie l'état de la porte après ouverture/fermeture
-            time.sleep(5)  # Délai avant l'affichage du message
+            #check_door_status(speaker)  # Vérifie l'état de la porte après ouverture/fermeture
+            time.sleep(5)  # Délai avant l'affichage du message     
     elif menu == 3:
         display_message("Suppression...", line=1)
-        time.sleep(2)  # Simule la suppression d'un utilisateur
-
+        time.sleep(2)  # Simule la suppression d'un utilisateur        
 # Boucle principale
+        
+display_message(" Bienvenus chez",1)
+display_message("    Jet1Oeil",2) 
+
 while True:
     sensor = init_sensor()
     #print(button1)
     #print(button2)
-    # Détection du changement d'état du bouton 2 (pour changer de menu)
-
+    # Détection du changement d'état du bouton 2 (pour changer de menu)  
     if button2.is_pressed:
         print("je change")
         menu = menu + 1 if menu < 3 else 1  # Cycle entre les menus 1, 2 et 3
         menu_actions(menu)  # Afficher le menu correspondant
         time.sleep(0.2)  # Anti-rebond simple
-
+        
     # Détection du changement d'état du bouton 1 (pour valider une action)
     if button1.is_pressed:
         print("je rentre")
