@@ -9,7 +9,7 @@ from speaker import play_sound
 from config import BUTTON1_PIN, BUTTON2_PIN
 from gpio_setup import setup_gpio
 from lcd_display import clear
-from ajouteverifadminforadd import init_sensor,enroll_fingerprint, verify_fingerprint,addByAdmin
+from fingerprint import init_sensor,enroll_fingerprint, verify_fingerprint,addByAdmin
 
 #setup_gpio()
 # Initialisation du PWM

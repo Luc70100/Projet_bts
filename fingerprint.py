@@ -4,9 +4,7 @@ import time
 from pyfingerprint.pyfingerprint import PyFingerprint
 from db import enregistrer_empreinte, comparer_empreinte
 from mail import port,smtp_server,login,password,sender_email,receiver_email,message,smtplib
-from lcd_display import scroll_text
-tentative = 0
-
+from lcd_display import scroll_text,clear,display_message
 def init_sensor():
     try:
         f = PyFingerprint("/dev/ttyAMA0", 57600, 0xFFFFFFFF, 0x00000000)
@@ -35,13 +33,13 @@ def enroll_fingerprint(f):
     print("✅ Empreinte enregistrée.")
 
 def verify_fingerprint(f):
+    tentative=0
     time.sleep(2)
-
-    scroll_text("\n👉 Place ton doigt pour vérification...")
-    
+    clear()
+    scroll_text("Place ton doigt pour vérification...",1)
     while not f.readImage():
         pass
-    scroll_text("✅ Nouvelle empreinte capturée !")
+    clear()
     f.convertImage(0x01)
     new_characteristics = f.downloadCharacteristics(0x01)
 
@@ -50,11 +48,17 @@ def verify_fingerprint(f):
 
     if match:
         print(f"✅✅ MATCH ! L'empreinte correspond à l'ID {user_id} nommer {nom} {prenom} qui a le grade {grade} (Score : {score})")
+        scroll_text(f"Bonjour {nom},{prenom}",1)
+        display_message("Porte ouverte",2)
         tentative=0       
         return match, score, user_id, grade, nom, prenom
     else:
         print(f"❌ PAS DE MATCH ! (Score : {score})")
+        restant = tentative - 10 
+        print(f"empreinte non reconnue il reste plus que {restant} avant alerte")
         tentative+=1
+        display_message("empreinte non reconnue!!",1)
+        display_message(f"tentative restante {restant}",2)
         if tentative >= 10 :
             with smtplib.SMTP(smtp_server, port) as server:
                 server.starttls()  # Sécuriser la connexion

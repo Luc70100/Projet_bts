@@ -2,8 +2,6 @@
 
 import time
 from gpiozero import Button, PWMOutputDevice
-from lcd_display import display_message
-
 # Nous utilisons les objets fournis par gpiozero
 from config import DOOR_CONTACT_PIN, RELAY_PIN, SPEAKER_PIN
 
@@ -11,8 +9,7 @@ def check_door_status(speaker):
     # Vérification du contacteur de porte
     door_contact = Button(DOOR_CONTACT_PIN)  # Utilisation de Button pour le contacteur
     if door_contact.is_pressed:  # La porte est ouverte
-        display_message("Ferme la Porte", line=1)
-        display_message("Connard", line=2)
+        print("Ferme la Porte")
         print("Ferme la Porte")
         speaker.frequency = 250  # Démarre le son à 50% de la largeur d'impulsion
         speaker.value = 0.1
@@ -20,11 +17,11 @@ def check_door_status(speaker):
             time.sleep(0.1)  # Petite pause pour éviter de surcharger le CPU
 
         speaker.off()  # Arrêter le son quand la porte est fermée
-        display_message("A Bientot", line=1)
+        print("A Bientot")
         print("A Bientot")
 
     else:  # La porte est fermée
-        display_message("A Bientot", line=1)
+        print("A Bientot")
         print("A Bientot")
         speaker.off()  # Arrêter le PWM si la porte est fermée
 
