@@ -39,11 +39,11 @@ def handle_function(menu, sensor):
         id = addByAdmin(sensor)
         if id is not None:
             clear()
-            display_message("Creation de l'utilisateur...", line=1)
+            scroll_text("Creation de l'utilisateur...", line=1)
             time.sleep(2)  # Simule l'ajout d'un doigt
             user, password = creationuser(id)
+            clear()
             while not button1.is_pressed and not button2.is_pressed:
-                clear()
                 display_message(f"id:{user}", 1)
                 display_message(f"mdp:{password}", 2)
                 last_action_time = time.time()  # Mettre à jour le temps de la dernière action
@@ -59,7 +59,8 @@ def handle_function(menu, sensor):
             clear()
             display_message("Porte Ouvert",1)
             logopen(result[2])
-            # check_door_status(speaker)  # Vérifie l'état de la porte après ouverture/fermeture
+            time.sleep(30)
+            check_door_status(speaker)  # Vérifie l'état de la porte après ouverture/fermeture
             time.sleep(5)  # Délai avant l'affichage du message
             last_action_time = time.time()  # Mettre à jour le temps de la dernière action
     elif menu == 3:

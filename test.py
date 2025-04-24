@@ -1,34 +1,30 @@
-from gpiozero import PWMOutputDevice
+from gpiozero import Button, PWMOutputDevice
 import time
 
-# Configuration de la broche GPIO (ex: GPIO 17)
-GPIO_PIN = 4
+# Configuration du haut-parleur
+speaker = PWMOutputDevice(4)  # Utilise gpiozero pour le contrôle du PWM
 
-# Initialisation du GPIO avec modulation de fréquence
-speaker = PWMOutputDevice(GPIO_PIN)
+# Fréquences pour l'alarme (en Hz)
+tone1 = 1000  # 1er ton
+tone2 = 1500  # 2ème ton
 
-def set_frequency(frequency):
-    """Définit la fréquence du signal PWM pour le haut-parleur."""
-    if frequency > 0:
-        speaker.frequency = frequency
-        speaker.value = 0.5  # Définit un rapport cyclique de 50%
-        print(f"Haut-parleur activé à {frequency} Hz")
-    else:
-        speaker.off()
-        print("Haut-parleur désactivé")
+# Durée de chaque ton (en secondes)
+tone_duration = 0.1
 
-try:
-    while True:
-        command = input("Entrez une fréquence en Hz (0 pour éteindre, 'exit' pour quitter) : ")
-        if command == "exit":
-            break
-        try:
-            freq = float(command)
-            set_frequency(freq)
-        except ValueError:
-            print("Veuillez entrer un nombre valide.")
-except KeyboardInterrupt:
-    print("\nInterruption détectée. Arrêt du programme.")
-finally:
-    speaker.off()
-    print("GPIO nettoyé.")
+# Combien de fois répéter l'alarme
+repetitions = 10
+
+for _ in range(repetitions):
+    speaker.frequency = tone1
+    speaker.value = 0.1
+
+    time.sleep(tone_duration)
+    
+    speaker.frequency = tone2
+    speaker.value = 0.1
+
+    time.sleep(tone_duration)
+
+
+# Arrêter le son
+speaker.off()

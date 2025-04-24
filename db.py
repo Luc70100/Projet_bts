@@ -4,6 +4,7 @@ import mysql.connector
 from config import MYSQL_CONFIG
 import secrets
 import string
+import bcrypt
 
 def connect_db():
     return mysql.connector.connect(**MYSQL_CONFIG)
@@ -49,9 +50,10 @@ def creationuser(id):
         conn = connect_db()
         cursor = conn.cursor()
         password=''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(8))
+        passwordhashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
         # Insérer l'utilisateur dans la table utilisateurs avec l'ID de l'empreinte
         query = "INSERT INTO utilisateurs (fingerprint_id, username, password) VALUES (%s, %s, %s)"
-        cursor.execute(query, (id, id, password))
+        cursor.execute(query, (id, id, passwordhashed))
         conn.commit()
         print(f"✅ Empreinte et utilisateur enregistrés en base de données !")
         return id,password

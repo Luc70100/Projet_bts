@@ -18,6 +18,7 @@ def init_sensor():
 
 def enroll_fingerprint(f):
     print("👉 Place ton doigt sur le capteur pour l'enregistrer...")
+    clear()
     display_message("Poser le doigt",1)
     while not f.readImage():
         pass

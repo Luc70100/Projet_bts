@@ -15,7 +15,7 @@ MYSQL_CONFIG = {
 # Configuration des GPIO
 BUTTON1_PIN = 27  # Bouton pour valider
 BUTTON2_PIN = 22   # Bouton pour changer de menu
-DOOR_CONTACT_PIN = 26  # Contacteur de porte
+DOOR_CONTACT_PIN = 25  # Contacteur de porte
 RELAY_PIN = 23  # Relais pour commander la porte
 SPEAKER_PIN = 4  # Broche o� le haut-parleur est connect�
 
