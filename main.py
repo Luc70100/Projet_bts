@@ -1,21 +1,15 @@
 import time
 from lcddriver import lcd
-from gpiozero import Button, PWMOutputDevice
 from lcd_display import display_message, scroll_text, clear
 from door_control import check_door_status, open_door
 from speaker import play_sound
-from config import BUTTON1_PIN, BUTTON2_PIN
+from config import BUTTON1_PIN, BUTTON2_PIN, speaker, button1, button2
 from gpio_setup import setup_gpio
-from fingerprint import init_sensor, enroll_fingerprint, verify_fingerprint, addByAdmin
+from fingerprint import init_sensor, enroll_fingerprint, verify_fingerprint, addByAdmin,delByAdmin
 from db import creationuser
-from log import logopen
+from log import logopen, logfile
 
-# Initialisation du PWM
-speaker = PWMOutputDevice(4)  # Utilise gpiozero pour le contrôle du PWM
-
-# Définition des boutons
-button1 = Button(BUTTON1_PIN, pull_up=False)
-button2 = Button(BUTTON2_PIN, pull_up=False)
+logfile()
 
 # Variables pour gérer les menus
 menu = 0
@@ -59,12 +53,13 @@ def handle_function(menu, sensor):
             clear()
             display_message("Porte Ouvert",1)
             logopen(result[2])
-            time.sleep(30)
+            time.sleep(30) #on attend que la personne se serve avant de check la fermeture 
             check_door_status(speaker)  # Vérifie l'état de la porte après ouverture/fermeture
             time.sleep(5)  # Délai avant l'affichage du message
             last_action_time = time.time()  # Mettre à jour le temps de la dernière action
     elif menu == 3:
         display_message("Suppression...", line=1)
+        delByAdmin(sensor)
         time.sleep(2)  # Simule la suppression d'un utilisateur
         last_action_time = time.time()  # Mettre à jour le temps de la dernière action
 

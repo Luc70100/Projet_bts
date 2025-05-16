@@ -1,30 +1,32 @@
-from gpiozero import Button, PWMOutputDevice
+from db import enregistrer_empreinte, comparer_empreinte, listeruser
+from config import BUTTON1_PIN, BUTTON2_PIN
+from gpiozero import Button
 import time
 
-# Configuration du haut-parleur
-speaker = PWMOutputDevice(4)  # Utilise gpiozero pour le contrôle du PWM
+button1 = Button(BUTTON1_PIN, pull_up=False)
+button2 = Button(BUTTON2_PIN, pull_up=False)
 
-# Fréquences pour l'alarme (en Hz)
-tone1 = 1000  # 1er ton
-tone2 = 1500  # 2ème ton
+listuser = []
+n = 0
+users = listeruser()
 
-# Durée de chaque ton (en secondes)
-tone_duration = 0.1
+for i in range(len(users)):
+    if users[i][0]:
+        listuser.append(users[i][0])
+print(listuser)
 
-# Combien de fois répéter l'alarme
-repetitions = 10
+while not button2.is_pressed:
+    if button1.is_pressed:
+        if n < len(listuser):
+            print("Utilisateur sélectionné :", listuser[n])
+            n += 1
+            time.sleep(1)
+        else:
+            print("Fin de la liste des utilisateurs.")
+            break
 
-for _ in range(repetitions):
-    speaker.frequency = tone1
-    speaker.value = 0.1
-
-    time.sleep(tone_duration)
-    
-    speaker.frequency = tone2
-    speaker.value = 0.1
-
-    time.sleep(tone_duration)
-
-
-# Arrêter le son
-speaker.off()
+# S’assurer que n est valide avant l’affichage
+if n < len(users):
+    print(users[n][1])
+else:
+    print("Index hors limites, aucun utilisateur sélectionné.")

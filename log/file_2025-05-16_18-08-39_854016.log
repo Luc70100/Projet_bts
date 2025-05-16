@@ -1,0 +1,9 @@
+2025-05-16 18:08:50.798 | INFO     | log:debbuginfo:32 - ✅✅ MATCH ! L'empreinte correspond à l'ID 11 nommer Bourguignon2 Luc2 qui a le grade 2 (Score : 180)
+2025-05-16 18:08:54.436 | INFO     | log:debbuginfo:32 - Ajoute de doigt en cour
+2025-05-16 18:08:54.436 | INFO     | log:debbuginfo:32 - empreint en cour de capture
+2025-05-16 18:09:00.460 | INFO     | log:debbuginfo:32 - ✅ Empreinte capturée !
+2025-05-16 18:09:00.889 | INFO     | log:debbuginfo:32 - ✅ Empreinte enregistrée en base de données !
+2025-05-16 18:09:00.956 | INFO     | log:debbuginfo:32 - ✅ Empreinte enregistrée.
+2025-05-16 18:09:07.999 | INFO     | log:debbuginfo:32 - ✅ Empreinte et utilisateur enregistrés en base de données !
+2025-05-16 18:10:53.372 | WARNING  | log:debbugwarning:34 - ❌ PAS DE MATCH ! (Score : 0)
+2025-05-16 18:10:53.373 | WARNING  | log:debbugwarning:34 - empreinte non reconnue il reste plus que 9 avant alerte
