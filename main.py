@@ -8,6 +8,7 @@ from gpio_setup import setup_gpio
 from fingerprint import init_sensor, enroll_fingerprint, verify_fingerprint, addByAdmin,delByAdmin
 from db import creationuser
 from log import logopen, logfile
+import requests
 
 logfile()
 
@@ -49,6 +50,7 @@ def handle_function(menu, sensor):
         if result:
             match = result[0]
         if match:
+            requests.get("http://admin:Zx23-Zx81@localhost:25000/service/program/trigger?id=1") #requette pour cree le signet
             open_door()
             clear()
             display_message("Porte Ouvert",1)

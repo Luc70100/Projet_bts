@@ -1,0 +1,4 @@
+2025-06-02 16:24:21.912 | INFO     | log:debbuginfo:32 - ✅✅ MATCH ! L'empreinte correspond à l'ID 11 nommer Bourguignon2 Luc2 qui a le grade 2 (Score : 75)
+2025-06-02 16:24:25.553 | INFO     | log:debbuginfo:32 - relay activer
+2025-06-02 16:24:30.611 | INFO     | log:debbuginfo:32 - id qui essaye d'ouvrire la port : 11
+2025-06-02 16:24:30.615 | INFO     | log:debbuginfo:32 - enregistrement de l'ouverture effectuer

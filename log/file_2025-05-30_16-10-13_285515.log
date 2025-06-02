@@ -1,0 +1,11 @@
+2025-05-30 16:10:54.445 | INFO     | log:debbuginfo:32 - ✅✅ MATCH ! L'empreinte correspond à l'ID 11 nommer Bourguignon2 Luc2 qui a le grade 2 (Score : 266)
+2025-05-30 16:10:58.082 | INFO     | log:debbuginfo:32 - Ajoute de doigt en cour
+2025-05-30 16:10:58.082 | INFO     | log:debbuginfo:32 - empreint en cour de capture
+2025-05-30 16:11:01.429 | INFO     | log:debbuginfo:32 - ✅ Empreinte capturée !
+2025-05-30 16:11:01.917 | INFO     | log:debbuginfo:32 - ✅ Empreinte enregistrée en base de données !
+2025-05-30 16:11:01.985 | INFO     | log:debbuginfo:32 - ✅ Empreinte enregistrée.
+2025-05-30 16:11:09.027 | INFO     | log:debbuginfo:32 - ✅ Empreinte et utilisateur enregistrés en base de données !
+2025-05-30 16:25:01.691 | INFO     | log:debbuginfo:32 - ✅✅ MATCH ! L'empreinte correspond à l'ID 25 nommer jouvenceau jules qui a le grade 1 (Score : 87)
+2025-05-30 16:25:04.964 | INFO     | log:debbuginfo:32 - relay activer
+2025-05-30 16:25:10.022 | INFO     | log:debbuginfo:32 - id qui essaye d'ouvrire la port : 25
+2025-05-30 16:25:10.025 | INFO     | log:debbuginfo:32 - enregistrement de l'ouverture effectuer
